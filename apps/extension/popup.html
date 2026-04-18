@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OutreachAI</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <span class="logo-icon">✦</span>
+        <span class="logo-text">OutreachAI</span>
+      </div>
+      <span id="gen-count" class="gen-count"></span>
+    </header>
+
+    <!-- Resume Section -->
+    <section id="resume-section">
+      <div class="section-row">
+        <p class="section-label">Your Resume</p>
+        <button id="clear-resume-btn" class="link-btn hidden">Remove</button>
+      </div>
+
+      <div id="upload-area" class="upload-area" role="button" tabindex="0"
+           aria-label="Upload your resume">
+        <input type="file" id="resume-file" accept=".pdf,.txt" hidden />
+        <span class="upload-icon" id="upload-icon">📄</span>
+        <div class="upload-text">
+          <span id="upload-label">Upload Resume</span>
+          <span id="upload-hint" class="upload-hint">PDF or TXT · stored locally</span>
+        </div>
+      </div>
+
+      <p id="resume-warning" class="warning-text hidden"></p>
+    </section>
+
+    <!-- Profile loading skeleton -->
+    <div id="profile-loading" class="hidden">
+      <div class="skeleton skeleton-name"></div>
+      <div class="skeleton skeleton-title"></div>
+    </div>
+
+    <!-- Not on LinkedIn -->
+    <div id="not-linkedin" class="notice hidden">
+      <span class="notice-icon">🔗</span>
+      <p>Open a LinkedIn profile page<br/>to generate a message.</p>
+    </div>
+
+    <!-- Profile Card + Controls (shown on LinkedIn /in/ pages) -->
+    <section id="generate-section" class="hidden">
+
+      <div id="profile-card" class="profile-card">
+        <div id="profile-avatar" class="profile-avatar" aria-hidden="true"></div>
+        <div class="profile-info">
+          <p id="profile-name" class="profile-name"></p>
+          <p id="profile-meta" class="profile-meta"></p>
+        </div>
+        <div id="profile-badge" class="profile-badge">
+          <span class="badge-dot"></span>
+          <span>Live</span>
+        </div>
+      </div>
+
+      <!-- Tone selector -->
+      <div class="tone-row">
+        <p class="section-label">Tone</p>
+        <div class="tone-pills" role="group" aria-label="Message tone">
+          <button class="tone-pill active" data-tone="friendly">Friendly</button>
+          <button class="tone-pill" data-tone="professional">Professional</button>
+          <button class="tone-pill" data-tone="direct">Direct</button>
+        </div>
+      </div>
+
+      <button id="generate-btn" class="btn btn-primary" disabled>
+        <span id="btn-label">Generate Message</span>
+        <span id="btn-spinner" class="spinner hidden"></span>
+      </button>
+    </section>
+
+    <!-- Output Section -->
+    <section id="output-section" class="hidden">
+      <div class="section-row">
+        <p class="section-label">Generated Message</p>
+        <span id="char-count" class="char-count"></span>
+      </div>
+
+      <textarea id="message-output" rows="6"
+                placeholder="Your message will appear here…"
+                spellcheck="true"></textarea>
+
+      <div class="action-row">
+        <button id="insert-btn" class="btn btn-secondary">
+          <span id="insert-label">Insert into Chat</span>
+        </button>
+        <button id="copy-btn" class="btn btn-ghost" title="Copy to clipboard">Copy</button>
+        <button id="regen-btn" class="btn btn-ghost" title="Generate a new version">↺</button>
+      </div>
+    </section>
+
+    <!-- Error banner -->
+    <div id="error-banner" class="error-banner hidden">
+      <span class="error-icon">!</span>
+      <p id="error-msg"></p>
+    </div>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,435 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0f0f11;
+  color: #e8e8ed;
+  width: 340px;
+}
+
+.container {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #222226;
+}
+
+.gen-count {
+  font-size: 10px;
+  color: #444;
+  font-variant-numeric: tabular-nums;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.logo-icon {
+  color: #7c6af7;
+  font-size: 17px;
+  line-height: 1;
+}
+
+.logo-text {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: #f0f0f5;
+}
+
+/* ── Section helpers ──────────────────────────────────────────────────────── */
+
+.section-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #666;
+}
+
+.section-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  font-size: 11px;
+  color: #f87171;
+  cursor: pointer;
+  padding: 0;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+/* ── Upload area ──────────────────────────────────────────────────────────── */
+
+.upload-area {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  border: 1.5px dashed #2e2e35;
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+  outline: none;
+}
+
+.upload-area:hover,
+.upload-area:focus-visible {
+  border-color: #7c6af7;
+  background: #16161e;
+}
+
+.upload-area.has-file {
+  border-color: #22c55e;
+  border-style: solid;
+  background: #0c1a14;
+}
+
+.upload-area.drag-over {
+  border-color: #7c6af7;
+  background: #16161e;
+}
+
+.upload-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.upload-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#upload-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #ccc;
+}
+
+.upload-hint {
+  font-size: 11px;
+  color: #555;
+}
+
+.warning-text {
+  font-size: 11px;
+  color: #fbbf24;
+  margin-top: 5px;
+}
+
+/* ── Skeleton loader ──────────────────────────────────────────────────────── */
+
+.skeleton {
+  background: linear-gradient(90deg, #1e1e24 25%, #28282f 50%, #1e1e24 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 5px;
+}
+
+.skeleton-name  { height: 14px; width: 55%; margin-bottom: 7px; }
+.skeleton-title { height: 11px; width: 75%; }
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Not-on-LinkedIn notice ───────────────────────────────────────────────── */
+
+.notice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: #161619;
+  border-radius: 10px;
+  padding: 18px 14px;
+  text-align: center;
+}
+
+.notice-icon {
+  font-size: 22px;
+}
+
+.notice p {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ── Profile card ─────────────────────────────────────────────────────────── */
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  background: #161619;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+}
+
+.profile-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #7c6af7;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ececf1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-meta {
+  font-size: 11px;
+  color: #666;
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: #22c55e;
+  flex-shrink: 0;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ── Tone selector ────────────────────────────────────────────────────────── */
+
+.tone-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tone-pills {
+  display: flex;
+  gap: 5px;
+}
+
+.tone-pill {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1.5px solid #2e2e35;
+  background: transparent;
+  color: #777;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.tone-pill:hover {
+  border-color: #7c6af7;
+  color: #bbb;
+}
+
+.tone-pill.active {
+  background: #7c6af7;
+  border-color: #7c6af7;
+  color: #fff;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────────── */
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 9px 14px;
+  transition: background 0.15s, opacity 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #7c6af7;
+  color: #fff;
+  width: 100%;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #6b59e8;
+}
+
+.btn-secondary {
+  background: #222228;
+  color: #ddd;
+  flex: 1;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #2c2c34;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #777;
+  border: 1.5px solid #2a2a30;
+  min-width: 52px;
+}
+
+.btn-ghost:hover {
+  background: #18181e;
+  color: #aaa;
+}
+
+.action-row {
+  display: flex;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+/* ── Spinner ──────────────────────────────────────────────────────────────── */
+
+.spinner {
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Output area ──────────────────────────────────────────────────────────── */
+
+textarea {
+  width: 100%;
+  background: #141418;
+  border: 1.5px solid #222228;
+  border-radius: 8px;
+  color: #ddd;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 10px 12px;
+  resize: vertical;
+  font-family: inherit;
+  min-height: 100px;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #7c6af7;
+}
+
+.char-count {
+  font-size: 10.5px;
+  color: #444;
+}
+
+.char-count.over {
+  color: #f87171;
+}
+
+/* ── Error banner ─────────────────────────────────────────────────────────── */
+
+.error-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: #1f1215;
+  border: 1px solid #3d1a1a;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.error-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #f87171;
+  color: #1f1215;
+  font-size: 10px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+#error-msg {
+  font-size: 12px;
+  color: #f87171;
+  line-height: 1.5;
+}
+
+/* ── Utility ──────────────────────────────────────────────────────────────── */
+
+.hidden {
+  display: none !important;
+}
