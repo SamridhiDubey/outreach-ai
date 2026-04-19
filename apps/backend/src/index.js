@@ -109,7 +109,7 @@ app.get("/", (_req, res) => {
 // ── /generate ─────────────────────────────────────────────────────────────────
 
 app.post("/generate", requireExtensionToken, generateLimiter, async (req, res) => {
-  const { resumeText, tone, userId } = req.body;
+  const { resumeText, tone, userId, role, purpose, extraNotes, referralJob } = req.body;
 
   // ── Validate & sanitise ───────────────────────────────────────────────────
 
@@ -133,7 +133,11 @@ app.post("/generate", requireExtensionToken, generateLimiter, async (req, res) =
       .json({ error: "Profile has no name or title — open a LinkedIn profile page first." });
   }
 
-  const resolvedTone = VALID_TONES.has(tone) ? tone : "friendly";
+  const resolvedTone    = VALID_TONES.has(tone) ? tone : "friendly";
+  const resolvedRole    = role === "recruiter" ? "recruiter" : "jobseeker";
+  const resolvedPurpose = ["connect", "referral"].includes(purpose) ? purpose : "connect";
+  const safeExtraNotes  = typeof extraNotes === "string" ? extraNotes.slice(0, 1000) : "";
+  const safeReferralJob = typeof referralJob === "string" ? referralJob.slice(0, 500) : "";
 
   // userId must be a valid UUID if provided
   const safeUserId = userId && UUID_RE.test(userId) ? userId : null;
@@ -163,7 +167,7 @@ app.post("/generate", requireExtensionToken, generateLimiter, async (req, res) =
   // ── Generate ──────────────────────────────────────────────────────────────
 
   try {
-    const message = await generateMessage(profileData, resolvedResume, resolvedTone);
+    const message = await generateMessage(profileData, resolvedResume, resolvedTone, resolvedRole, resolvedPurpose, safeExtraNotes, safeReferralJob);
     logEvent(safeUserId, resolvedTone, true);
     return res.json({ message });
   } catch (err) {

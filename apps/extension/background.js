@@ -10,14 +10,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-async function handleGenerate({ profileData, resumeText, tone, userId }) {
+async function handleGenerate({ profileData, resumeText, tone, userId, role, purpose, extraNotes, referralJob }) {
   const response = await fetch(`${BACKEND_URL}/generate`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "x-extension-token": EXTENSION_SECRET,
     },
-    body: JSON.stringify({ profileData, resumeText, tone, userId }),
+    body: JSON.stringify({ profileData, resumeText, tone, userId, role, purpose, extraNotes, referralJob }),
   });
 
   if (!response.ok) {

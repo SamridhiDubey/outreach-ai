@@ -18,15 +18,21 @@
       <span id="gen-count" class="gen-count"></span>
     </header>
 
-    <!-- Resume Section -->
-    <section id="resume-section">
+    <!-- Role selector -->
+    <div class="role-row">
+      <button class="role-pill active" data-role="jobseeker">👤 Job Seeker</button>
+      <button class="role-pill" data-role="recruiter">💼 Recruiter</button>
+    </div>
+
+    <!-- ── JOB SEEKER CONTEXT ── -->
+    <section id="jobseeker-section">
+
+      <!-- Resume -->
       <div class="section-row">
         <p class="section-label">Your Resume</p>
         <button id="clear-resume-btn" class="link-btn hidden">Remove</button>
       </div>
-
-      <div id="upload-area" class="upload-area" role="button" tabindex="0"
-           aria-label="Upload your resume">
+      <div id="upload-area" class="upload-area" role="button" tabindex="0" aria-label="Upload your resume">
         <input type="file" id="resume-file" accept=".pdf,.txt" hidden />
         <span class="upload-icon" id="upload-icon">📄</span>
         <div class="upload-text">
@@ -34,8 +40,78 @@
           <span id="upload-hint" class="upload-hint">PDF or TXT · stored locally</span>
         </div>
       </div>
-
       <p id="resume-warning" class="warning-text hidden"></p>
+
+      <!-- Purpose -->
+      <div class="tone-row" style="margin-top:10px">
+        <p class="section-label">Goal</p>
+        <div class="tone-pills" role="group" aria-label="Outreach goal">
+          <button class="tone-pill active" data-purpose="connect">Connect</button>
+          <button class="tone-pill" data-purpose="referral">Referral</button>
+        </div>
+      </div>
+
+      <!-- Referral: job details (shown only when Referral is selected) -->
+      <div id="referral-job-section" class="hidden" style="margin-top:10px">
+        <p class="section-label" style="margin-bottom:5px">Job You Want a Referral For</p>
+        <input id="referral-job-url" type="text" class="text-input"
+          placeholder="Job posting URL or Job ID (e.g. JR-12345)" />
+        <p class="referral-tip">💡 Tip: after sending, attach your resume in the chat to make it easy for them.</p>
+      </div>
+
+      <!-- Extra context -->
+      <div style="margin-top:10px">
+        <p class="section-label" style="margin-bottom:5px">Extra Context <span class="optional-label">(optional)</span></p>
+        <textarea id="extra-notes-jobseeker" class="context-textarea" rows="2"
+          placeholder="Anything extra — mutual connection, why you admire their work…"></textarea>
+      </div>
+
+    </section>
+
+    <!-- ── RECRUITER CONTEXT ── -->
+    <section id="recruiter-section" class="hidden">
+
+      <div class="section-row">
+        <p class="section-label">Job Details</p>
+      </div>
+
+      <!-- Input method tabs -->
+      <div class="input-method-row">
+        <button class="method-pill active" data-method="url">🔗 Link</button>
+        <button class="method-pill" data-method="upload">📄 Upload JD</button>
+        <button class="method-pill" data-method="type">✏️ Type</button>
+      </div>
+
+      <!-- URL input -->
+      <div id="method-url" class="method-panel">
+        <input id="job-url" type="url" class="text-input" placeholder="Paste job posting URL…" />
+      </div>
+
+      <!-- Upload JD -->
+      <div id="method-upload" class="method-panel hidden">
+        <div id="jd-upload-area" class="upload-area" role="button" tabindex="0" aria-label="Upload job description">
+          <input type="file" id="jd-file" accept=".pdf,.txt" hidden />
+          <span class="upload-icon" id="jd-upload-icon">📄</span>
+          <div class="upload-text">
+            <span id="jd-upload-label">Upload Job Description</span>
+            <span class="upload-hint">PDF or TXT</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Type manually -->
+      <div id="method-type" class="method-panel hidden">
+        <textarea id="job-details-text" class="context-textarea"
+          rows="3" placeholder="Paste or type the job title, company, key requirements…"></textarea>
+      </div>
+
+      <!-- Extra notes -->
+      <div style="margin-top:10px">
+        <p class="section-label" style="margin-bottom:5px">Extra Notes <span class="optional-label">(optional)</span></p>
+        <textarea id="extra-notes-recruiter" class="context-textarea" rows="2"
+          placeholder="Any extra context — selling points, candidate fit, etc."></textarea>
+      </div>
+
     </section>
 
     <!-- Profile loading skeleton -->
@@ -50,7 +126,7 @@
       <p>Open a LinkedIn profile page<br/>to generate a message.</p>
     </div>
 
-    <!-- Profile Card + Controls (shown on LinkedIn /in/ pages) -->
+    <!-- Profile Card + Controls -->
     <section id="generate-section" class="hidden">
 
       <div id="profile-card" class="profile-card">
@@ -65,7 +141,7 @@
         </div>
       </div>
 
-      <!-- Tone selector -->
+      <!-- Tone -->
       <div class="tone-row">
         <p class="section-label">Tone</p>
         <div class="tone-pills" role="group" aria-label="Message tone">
@@ -87,18 +163,14 @@
         <p class="section-label">Generated Message</p>
         <span id="char-count" class="char-count"></span>
       </div>
-
       <textarea id="message-output" rows="6"
                 placeholder="Your message will appear here…"
                 spellcheck="true"></textarea>
-
       <div class="action-row">
-        <button id="insert-btn" class="btn btn-secondary">
-          <span id="insert-label">Insert into Chat</span>
-        </button>
-        <button id="copy-btn" class="btn btn-ghost" title="Copy to clipboard">Copy</button>
+        <button id="copy-btn" class="btn btn-secondary">Copy Message</button>
         <button id="regen-btn" class="btn btn-ghost" title="Generate a new version">↺</button>
       </div>
+      <p class="copy-hint">Copy → open LinkedIn DM → paste & send</p>
     </section>
 
     <!-- Error banner -->
