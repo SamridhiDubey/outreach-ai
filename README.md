@@ -4,10 +4,12 @@ A Chrome extension that generates personalized LinkedIn DMs using your resume an
 
 ## What it does
 
-- Reads the LinkedIn profile you're viewing
-- Combines it with your resume
+- Reads the LinkedIn profile you're viewing (supports LinkedIn's 2024+ DOM layout)
+- Combines it with your resume or job description
 - Generates a short, personalized outreach message via Claude
-- Inserts it directly into LinkedIn's message box
+- Supports **Job Seeker** and **Recruiter** modes
+- Supports **Connect** and **Referral** outreach goals
+- Inserts the message directly into LinkedIn's compose box
 
 ## Tech Stack
 
@@ -110,6 +112,22 @@ Load the extension: Chrome → `chrome://extensions` → Developer mode → Load
 cd apps/backend
 vercel --prod
 ```
+
+## Extension Features
+
+- **Job Seeker mode** — upload your resume (PDF/TXT), pick Connect or Referral goal, add extra context
+- **Recruiter mode** — paste job URL, upload JD, or type it manually
+- **Tone selector** — Friendly / Professional / Direct
+- **Recipient-aware prompts** — different messaging for HR, Leaders, Managers, ICs
+- **Auto-insert** — clicks Message button and inserts generated text into the compose box
+
+## LinkedIn DOM Compatibility
+
+The content script supports both LinkedIn's classic layout and the 2024+ redesign:
+- Name extracted from `document.title` as primary fallback
+- Profile card data from `section[1]` when h2-name match fails
+- Experience extracted via three-pass strategy (artdeco list → section h2 → heading scan)
+- Broader location pattern matching (India, USA, UK, Canada, Germany, Australia, France, Singapore, Remote)
 
 ## Future Plans
 
